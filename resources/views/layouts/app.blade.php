@@ -10,8 +10,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Scripts -->
- @if (Request::secure())
 
+}
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -22,7 +22,6 @@
      <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
    
      <script src="https://kit.fontawesome.com/52d77073d0.js" crossorigin="anonymous"></script>
-     <link href="{{asset('css/all.css')}}" rel="stylesheet">
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Google Font -->
@@ -38,21 +37,6 @@
 <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ asset('css/slicknav.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
-    @else
-    <link href="{{secure_asset('css/all.css')}}" rel="stylesheet">
-
-
-    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
-       <!-- Css Styles -->
-       <link rel="stylesheet" href="{{secure_asset('css/bootstrap.min.css')}}" type="text/css">
-   <link rel="stylesheet" href="{{secure_asset('css/font-awesome.min.css')}}" type="text/css">
-   <link rel="stylesheet" href="{{secure_asset('css/elegant-icons.css')}}" type="text/css">
-       <link rel="stylesheet" href="{{ secure_asset('css/nice-select.css') }}" type="text/css">
-       <link rel="stylesheet" href="{{ secure_asset('css/jquery-ui.min.css') }}" type="text/css">
-   <link rel="stylesheet" href="{{ secure_asset('css/owl.carousel.min.css') }}" type="text/css">
-   <link rel="stylesheet" href="{{ secure_asset('css/slicknav.min.css') }}" type="text/css">
-       <link rel="stylesheet" href="{{ secure_asset('css/style.css') }}" type="text/css">
-@endif
     @yield('css')
 </head>
 <body>
@@ -340,12 +324,6 @@
         })
        }
     </script>
-     <script>
-         
-            $(".toast").toast("show")
-    
-    </script>
-     @if (Request::secure())
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
@@ -357,15 +335,10 @@
      <script src="{{URL::asset('js/mixitup.min.js')}}"></script>
  <script src="{{URL::asset('js/owl.carousel.min.js')}}"></script>
  <script src="{{URL::asset('js/main.js')}}"></script>
- @else
- <script src="{{secure_asset('js/jquery-3.3.1.min.js')}}"></script>
- <script src="{{secure_asset('js/bootstrap.min.js')}}"></script>
- <script src="{{secure_asset('js/jquery.nice-select.min.js')}}"></script>
- <script src="{{secure_asset('js/jquery-ui.min.js')}}"></script>
- <script src="{{secure_asset('js/jquery.slicknav.js')}}"></script>
- <script src="{{secure_asset('js/mixitup.min.js')}}"></script>
-<script src="{{secure_asset('js/owl.carousel.min.js')}}"></script>
-<script src="{{secure_asset('js/main.js')}}"></script>
-@endif
+ <script>
+     
+        $(".toast").toast("show")
+
+</script>
 </body>
 </html>
