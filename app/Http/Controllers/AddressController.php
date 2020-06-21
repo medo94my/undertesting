@@ -39,7 +39,7 @@ class AddressController extends Controller
                 'State'=>$req->input('state'),
                 'PostCode'=>$req->input('zipcode'),
                 'PhoneNo'=>$req->input('phone'),
-                'default_add'=>$req->input('default_add'),
+                'default_add'=>$req->input('default_add')=='on' ? 1:0,
                 'user_id'=>auth()->id()
                 ]
                                          );
