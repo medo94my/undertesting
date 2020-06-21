@@ -19,8 +19,8 @@ class AddressController extends Controller
     {
         $input =Address::find($id);
         
-        $input->firstName=$req->input('firstname');
-        $input->lastName=$req->input('lastname');
+        $input->First=$req->input('firstname');
+        $input->Last=$req->input('lastname');
         $input->Country=$req->input('country');
         $input->Address=$req->input('streetaddress').$req->input('extraAddress');
         $input->City=$req->input('city');
