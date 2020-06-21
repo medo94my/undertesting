@@ -22,6 +22,7 @@
      <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
    
      <script src="https://kit.fontawesome.com/52d77073d0.js" crossorigin="anonymous"></script>
+     <link href="{{asset('css/all.css')}}" rel="stylesheet">
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Google Font -->
@@ -38,7 +39,8 @@
 <link rel="stylesheet" href="{{ asset('css/slicknav.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
     @else
- <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{secure_asset('css/all.css')}}" rel="stylesheet">
+
 
     <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
        <!-- Css Styles -->
