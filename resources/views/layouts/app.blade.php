@@ -50,7 +50,7 @@
    <link rel="stylesheet" href="{{ secure_asset('css/owl.carousel.min.css') }}" type="text/css">
    <link rel="stylesheet" href="{{ secure_asset('css/slicknav.min.css') }}" type="text/css">
        <link rel="stylesheet" href="{{ secure_asset('css/style.css') }}" type="text/css">
-
+@endif
     @yield('css')
 </head>
 <body>
@@ -364,5 +364,6 @@
  <script src="{{URL::secure_asset('js/mixitup.min.js')}}"></script>
 <script src="{{URL::secure_asset('js/owl.carousel.min.js')}}"></script>
 <script src="{{URL::secure_asset('js/main.js')}}"></script>
+@endif
 </body>
 </html>
