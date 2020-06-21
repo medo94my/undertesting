@@ -135,23 +135,26 @@
                         <table>
                             <thead>
                                 <tr>
+                                
+                                    <th>Defalut Address</th>
                                     <th class="text-left">Full name</th>
                                     <th>Address</th>
                                     <th>Postcode</th>
                                     <th>Phone Number</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
+                                    <th>action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                  @foreach ($address as $place)
                                 
                                 <tr >
+                                    <td>
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="default_add" {{$place->default_add==1?'checked':''}}>
+                                        {{-- <input type="radio" name="default_add" id="{{$place->id}}" value="{{$place->id}}" > --}}
+                                    </td>
                                     <td class="text-left">
                                         {{-- <img src="{{asset($item->associatedModel->image)}}" alt="" style="width:100px; hieght:100px"> --}}
-                                        <p>{{strtoupper($place->firstName .' '.$place->LastName)}}</p>
+                                        <p>{{ucwords ($place->First .' '.$place->Last)}}</p>
                                     </td>
                                     <td class="">
                                     <p>{{$place->Address}}</p>
@@ -162,25 +165,25 @@
                                     <td class="">
                                         <p>{{$place->PhoneNo}}</p>
                                     </td>
-                                    <td class="shoping__cart__item__close">
-                                    {{-- <form action="{{route('destroy_address',$place->id)}}" method="post">
-                                        @method('delete')
-                                            <button class="btn btn-link"><i class="icon_close"></i></button>
-                                        </form> --}}
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                    {{-- <form action="{{route('update_address',$place->id)}}" method="get">
-                                        {{-- @method('put') 
-                                            <button class="btn btn-link"><i class="fa fa-edit"></i></button>
-                                        </form> --}}
-                                    </td>
+                                                <td class="shoping__cart__item__close">
+                                                    <div class="d-flex">
+                                                        <form action="{{route('destroy_address',$place->id)}}" method="post">
+                                                            @csrf
+                                                            @method('delete')
+                                                                <button class="btn btn-sm btn-danger mr-2"><i class="fas fa-trash"></i></button>
+                                                            </form> 
+                                                        <form action="{{route('update_address',$place->id)}}" method="get">
+                                                                <button class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></button>
+                                                            </form>
+                                                    </div>
+                                                </td>
                                 </tr>
                             @endforeach
 
                             </tbody>
                         </table>
                     </div>
-                    <a href="#"  class="site-btn ">+ Add Address</a>
+                <a href="{{route('Address-view')}}"  class="site-btn ">+ Add Address</a>
             </div>
             @else
             <form action="{{route('Address')}}" method="post">
@@ -241,6 +244,16 @@
                                         <input type="text" name="phone"  value="{{ old('phone')}}" required>
                                     </div>
                                 </div>
+            
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group form-check">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="default_add" {{$address->default_add==1?'checked':''}}>
+                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                      </div>
+                                </div>
+            
                             </div>
                             {{-- <div class="checkout__input"> 
                                 <p>Order notes<span>*</span></p>
@@ -277,12 +290,12 @@
                                 </div> --}}
                                 {{-- <p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do eiusmod tempor incididunt
                                     ut labore et dolore magna aliqua.</p> --}}
-                                    <div class="row"> 
+                                    {{-- <div class="row"> 
                                          <div class="col-lg-12 "> 
                                             <h6 class="mb-0"><span class="icon_tag_alt "></span> Have a coupon? <a href="#">Click here</a> to enter your code
                                             </h6>
                                       </div> 
-                                    </div>
+                                    </div> --}}
                                 <form id="payment-form" method="post" action="{{route('pay_process')}}" >
                                                 @csrf
                                             <div class="form-label-group">
@@ -358,13 +371,17 @@
                         email:'{{Auth::user()['email']}}',
                     
                         @if(isset($address))
+                        @foreach($address as $place)
+                        @if($place['default_add']===1)
                         address:{
-                            "city": '{{$address[0]['City']}}',
+                            "city": '{{$place['City']}}',
                             "country": 'MY',
-                            "line1": '{{$address[0]['Address']}}',
-                            "postal_code": '{{$address[0]['PostCode']}}',
-                            "state": '{{$address[0]['State']}}'
+                            "line1": '{{$place['Address']}}',
+                            "postal_code": '{{$place['PostCode']}}',
+                            "state": '{{$place['State']}}'
                         }
+                        @endif
+                        @endforeach
                         @endif
                         
                                                                 }

@@ -23,6 +23,7 @@ class CreateAddressTable extends Migration
             $table->string('State');
             $table->string('PostCode');
             $table->string('PhoneNo');
+            $table->tinyInteger('default_add')->default(1);
             $table->timestamps();
         });
         Schema::table('address', function (Blueprint $table) {

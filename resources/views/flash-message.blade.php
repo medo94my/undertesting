@@ -93,7 +93,9 @@
 @if ($errors->any())
 <div class="alert alert-danger">
     <button type="button" class="close" data-dismiss="alert">×</button>    
-    Please check the form below for errors
+    @foreach ($errors->all() as $error)
+      <p>{{$error}}</p>
+    @endforeach
 </div>
 {{-- <div aria-live="polite" aria-atomic="true"  style="position: relative; ">
     <div class="toast" data-delay="2000"  data-animation="true" style="position: absolute; top: 0; right: 5px; min-width:300px">

@@ -25,7 +25,9 @@
     </section> --}}
 
     <!-- Breadcrumb Section End -->
-    @include('flash-message')
+    <div class="container">
+        @include('flash-message')
+    </div>
     <!-- Product Section Begin -->
     <section class="product spad">
         <div class="container">

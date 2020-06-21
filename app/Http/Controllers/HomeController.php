@@ -28,5 +28,9 @@ class HomeController extends Controller
         return view('index',['products'=>$products,
         'latests'=>$last_added,]);
     }
+    public function contact()
+    {
+        return view('contact');
+    }
     
 }

@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Address;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
-
+use Mockery\Expectation;
 
 class AddressController extends Controller
 {
@@ -17,48 +18,89 @@ class AddressController extends Controller
     public function update(Request $req , $id)
 
     {
-        $input =Address::find($id);
-        
-        $input->First=$req->input('firstname');
-        $input->Last=$req->input('lastname');
-        $input->Country=$req->input('country');
-        $input->Address=$req->input('streetaddress').$req->input('extraAddress');
-        $input->City=$req->input('city');
-        $input->State=$req->input('state');
-        $input->PostCode=$req->input('zipcode');;
-        $input->PhoneNo=$req->input('phone');
-        $input->save();
-        return Redirect('/shop');
+        $rules =[
+            'firstname'=>'required|max:255|min:5|string',
+                'lastname'=>'required|max:255|min:5|string',
+                'country'=>'required|max:255|string',
+                'streetaddress'=>'required|max:255|min:5',
+                'extraAddress'=>'max:255',
+                'city'=>'required|max:255|string',
+                'state'=>'required|max:255|string',
+                'zipcode'=>'required|numeric|min:5',
+                'phone'=>'required|numeric|min:5',
+            ];
+             $req->validate($rules);
+             Address::where('id',$id)->update(
+                ['First' =>$req->input('firstname'),
+                'Last' => $req->input('lastname'),
+                'Country'=>$req->input('country'),
+                'Address'=>$req->input('streetaddress').$req->input('extraAddress'),
+                'City'=>$req->input('city'),
+                'State'=>$req->input('state'),
+                'PostCode'=>$req->input('zipcode'),
+                'PhoneNo'=>$req->input('phone'),
+                'default_add'=>$req->input('default_add'),
+                'user_id'=>auth()->id()
+                ]
+                                         );
+        return back()->with('success', "Address Has Been Upadted Successfully ");
     }
     public function create(Request $req)
     {
-        $rules =[
-                'firstname'=>'required|max:255|min:5|string',
-                    'lastname'=>'required|max:255|min:5|string',
-                    'country'=>'required|max:255|string',
-                    'streetaddress'=>'required|max:255|min:5',
-                    'extraAddress'=>'max:255',
-                    'city'=>'required|max:255|string',
-                    'state'=>'required|max:255|string',
-                    'zipcode'=>'required|numeric|min:5',
-                    'phone'=>'required|numeric|min:5',
-                ];
-                 $req->validate($rules);
+        if($req->input('default_add')=='on'){
+                $adrs=Address::all();
+                foreach ($adrs as $adr) {
+                    Address::where('id',$adr->id)->update(
+                        [
+                        'default_add'=>0,
+                        ] );
+                }
+        }
+            $rules =[
+                    'firstname'=>'required|max:255|min:5|string',
+                        'lastname'=>'required|max:255|min:5|string',
+                        'country'=>'required|max:255|string',
+                        'streetaddress'=>'required|max:255|min:5',
+                        'extraAddress'=>'max:255',
+                        'city'=>'required|max:255|string',
+                        'state'=>'required|max:255|string',
+                        'zipcode'=>'required|numeric|min:5',
+                        'phone'=>'required|numeric|min:5',
+                    ];
+                    $req->validate($rules);
+                    
                 
- 
-            $address = new Address;
-            $address->firstName=$req->input('firstname');
-            $address->lastName=$req->input('lastname');
-            $address->Country=$req->input('country');
-            $address->Address=$req->input('streetaddress').$req->input('extraAddress');
-            $address->City=$req->input('city');
-            $address->State=$req->input('state');
-            $address->PostCode=$req->input('zipcode');;
-            $address->PhoneNo=$req->input('phone');
-            $address->user_id=auth()->id();
-            error_log(auth()->id());
-            $address->save();
- 
-        return back()->with('success', "Address has been added successfully");
+        Address::insert(
+        ['First' =>$req->input('firstname'),
+            'Last' => $req->input('lastname'),
+            'Country'=>$req->input('country'),
+            'Address'=>$req->input('streetaddress').$req->input('extraAddress'),
+            'City'=>$req->input('city'),
+            'State'=>$req->input('state'),
+            'PostCode'=>$req->input('zipcode'),
+            'PhoneNo'=>$req->input('phone'),
+            'default_add'=>$req->input('default_add')=='on' ? 1:0,
+            'user_id'=>auth()->id()
+            ]
+                    );
+                // dump($req->input('default_add'));
+        return redirect(route('checkout'));
+    }
+    public function show()
+    {
+        return view('address.create');
+    }
+    public function destroy ($id)
+    
+    {
+         error_log($id); 
+        try {
+            Address::where('id',$id)->delete();
+            return back()->with('success',"Address removed Successfully");
+        } catch (Expectation $e) {
+            //throw $th;
+            return back()->with('error',$e->getExceptionMessage());
+        }
+
     }
 }
