@@ -356,14 +356,14 @@
  <script src="{{URL::asset('js/owl.carousel.min.js')}}"></script>
  <script src="{{URL::asset('js/main.js')}}"></script>
  @else
- <script src="{{URL::secure_asset('js/jquery-3.3.1.min.js')}}"></script>
- <script src="{{URL::secure_asset('js/bootstrap.min.js')}}"></script>
- <script src="{{URL::secure_asset('js/jquery.nice-select.min.js')}}"></script>
- <script src="{{URL::secure_asset('js/jquery-ui.min.js')}}"></script>
- <script src="{{URL::secure_asset('js/jquery.slicknav.js')}}"></script>
- <script src="{{URL::secure_asset('js/mixitup.min.js')}}"></script>
-<script src="{{URL::secure_asset('js/owl.carousel.min.js')}}"></script>
-<script src="{{URL::secure_asset('js/main.js')}}"></script>
+ <script src="{{secure_asset('js/jquery-3.3.1.min.js')}}"></script>
+ <script src="{{secure_asset('js/bootstrap.min.js')}}"></script>
+ <script src="{{secure_asset('js/jquery.nice-select.min.js')}}"></script>
+ <script src="{{secure_asset('js/jquery-ui.min.js')}}"></script>
+ <script src="{{secure_asset('js/jquery.slicknav.js')}}"></script>
+ <script src="{{secure_asset('js/mixitup.min.js')}}"></script>
+<script src="{{secure_asset('js/owl.carousel.min.js')}}"></script>
+<script src="{{secure_asset('js/main.js')}}"></script>
 @endif
 </body>
 </html>
