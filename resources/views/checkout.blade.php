@@ -249,7 +249,7 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="default_add" {{$address->default_add==1?'checked':''}}>
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="default_add" checked>
                                         <label class="form-check-label" for="exampleCheck1">Check me out</label>
                                       </div>
                                 </div>
