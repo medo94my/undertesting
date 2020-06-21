@@ -10,7 +10,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Scripts -->
-
+    {{-- icon --}}
+    <link rel="icon" href="{{asset('img/letter-m.png')}}">
 
     <script src="{{ asset('js/app.js') }}" defer></script>
 
