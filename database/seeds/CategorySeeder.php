@@ -2,7 +2,6 @@
 
 use Carbon\Carbon;
 use Illuminate\Support\Str;
-use Faker\Generator as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -14,7 +13,7 @@ class CategorySeeder extends Seeder
      *
      * @return void
      */
-    public function run(Faker $faker)
+    public function run()
     {
         $now = Carbon::now()->toDateTimeString();
             DB::table('catrgories')->insert([
